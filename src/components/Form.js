@@ -1,22 +1,60 @@
 import React from 'react'
+import styled from '@emotion/styled'
+
+const Field = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+`
+
+const Label = styled.label`
+  flex: 0 0 100px;
+`
+const Select = styled.select`
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e1e1e1;
+  -webkit-appearance: none;
+`
+const InputRadio = styled.input`
+  margin: 0 1rem;
+`
+const Button = styled.button`
+  background-color: #00838f;
+  font-size: 16px;
+  width: 100%;
+  padding: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  transition: background-color .3s ease;
+  margin-top: 2rem;
+
+  &:hover {
+    background-color: #26c6da;
+    cursor: pointer;
+  }
+`
 
 const Form = () => {
   return (
     <form>
-      <div>
-        <label>Marca </label>
-        <select>
-          <option value=" ">--Select--</option>
+      <Field>
+        <Label>Marca </Label>
+        <Select>
+          <option value=" ">-- Seleccione --</option>
           <option value=" ">Americano</option>
           <option value=" ">Europeo</option>
           <option value=" ">Asiatico</option>
-        </select>
-      </div>
+        </Select>
+      </Field>
 
-      <div>
-        <label>Modelo </label>
-        <select>
-          <option value="">-- Select --</option>
+      <Field>
+        <Label>Modelo </Label>
+        <Select>
+          <option value="">-- Seleccione --</option>
           <option value="2020">2020</option>
           <option value="2019">2019</option>
           <option value="2018">2018</option>
@@ -28,16 +66,16 @@ const Form = () => {
           <option value="2012">2012</option>
           <option value="2012">2011</option>
           <option value="2012">Otro</option>
-        </select>
-      </div>
+        </Select>
+      </Field>
 
-      <div>
-        <label>Plan </label>
-        <input type="radio" name="plan" value="basico" /> Basico
-        <input type="radio" name="plan" value="completo" /> Completo
-      </div>
+      <Field>
+        <Label>Plan </Label>
+        <InputRadio type="radio" name="plan" value="basico" /> Basico
+        <InputRadio type="radio" name="plan" value="completo" /> Completo
+      </Field>
 
-      <button type="button">Cotizar</button>
+      <Button type="button">Cotizar</Button>
     </form>
   )
 }
