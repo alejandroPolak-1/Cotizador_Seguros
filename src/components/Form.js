@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 
 const Field = styled.div`
@@ -29,7 +29,7 @@ const Button = styled.button`
   text-transform: uppercase;
   font-weight: bold;
   border: none;
-  transition: background-color .3s ease;
+  transition: background-color 0.3s ease;
   margin-top: 2rem;
 
   &:hover {
@@ -39,21 +39,42 @@ const Button = styled.button`
 `
 
 const Form = () => {
+  const [datas, setDatas] = useState({
+    marca: '',
+    year: '',
+    plan: '',
+  })
+
+  //Estraer los valores del State
+  const { marca, year, plan } = datas
+
+  //Leer los datos del Formulario y colocarlos en el State
+  const getInfo = (e) => {
+    setDatas({
+      ...datas,
+      [e.target.name]: e.target.value,
+    })
+  }
+
   return (
     <form>
       <Field>
         <Label>Marca </Label>
-        <Select>
+        <Select 
+        name="marca" 
+        value={marca} 
+        onChange={getInfo}
+        >
           <option value=" ">-- Seleccione --</option>
-          <option value=" ">Americano</option>
-          <option value=" ">Europeo</option>
-          <option value=" ">Asiatico</option>
+          <option value="americano">Americano</option>
+          <option value="europeo">Europeo</option>
+          <option value="asiatico">Asiatico</option>
         </Select>
       </Field>
 
       <Field>
-        <Label>Modelo </Label>
-        <Select>
+        <Label>Año </Label>
+        <Select name="year" value={year} onChange= {getInfo}>
           <option value="">-- Seleccione --</option>
           <option value="2020">2020</option>
           <option value="2019">2019</option>
@@ -71,8 +92,22 @@ const Form = () => {
 
       <Field>
         <Label>Plan </Label>
-        <InputRadio type="radio" name="plan" value="basico" /> Basico
-        <InputRadio type="radio" name="plan" value="completo" /> Completo
+        <InputRadio
+          type="radio"
+          name="plan"
+          value="basico"
+          checked={plan === 'basico'}
+          onChange= {getInfo}
+        />{' '}
+        Basico
+        <InputRadio
+          type="radio"
+          name="plan"
+          value="completo"
+          checked={plan === 'completo'}
+          onChange= {getInfo}
+        />{' '}
+        Completo
       </Field>
 
       <Button type="button">Cotizar</Button>
