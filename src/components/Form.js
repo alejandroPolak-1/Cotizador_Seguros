@@ -38,12 +38,22 @@ const Button = styled.button`
   }
 `
 
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+`
+
 const Form = () => {
   const [datas, setDatas] = useState({
     marca: '',
     year: '',
     plan: '',
   })
+  const [error, setError] = useState(false)
 
   //Estraer los valores del State
   const { marca, year, plan } = datas
@@ -56,15 +66,39 @@ const Form = () => {
     })
   }
 
+  //cuando el usuario presiona submit -> COTIZAR SEGURO
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    //validación
+    if (marca.trim() === '' || year.trim() === '' || plan.trim() === '') {
+      setError(true)
+      return
+    }
+
+    setError(false)
+
+    //Obtener diferencia de años
+
+    //por cada año hay que restar el 3%
+
+    // Americano 155
+    // Asiatico 5%
+    // Europeo 30%
+
+    //Basico aumenta %20
+    //Completo 50%
+
+    //Total
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
+      {error ? <Error>Todos lo campos son obligatorios </Error> : null}
+
       <Field>
         <Label>Marca </Label>
-        <Select 
-        name="marca" 
-        value={marca} 
-        onChange={getInfo}
-        >
+        <Select name="marca" value={marca} onChange={getInfo}>
           <option value=" ">-- Seleccione --</option>
           <option value="americano">Americano</option>
           <option value="europeo">Europeo</option>
@@ -74,7 +108,7 @@ const Form = () => {
 
       <Field>
         <Label>Año </Label>
-        <Select name="year" value={year} onChange= {getInfo}>
+        <Select name="year" value={year} onChange={getInfo}>
           <option value="">-- Seleccione --</option>
           <option value="2020">2020</option>
           <option value="2019">2019</option>
@@ -97,7 +131,7 @@ const Form = () => {
           name="plan"
           value="basico"
           checked={plan === 'basico'}
-          onChange= {getInfo}
+          onChange={getInfo}
         />{' '}
         Basico
         <InputRadio
@@ -105,12 +139,12 @@ const Form = () => {
           name="plan"
           value="completo"
           checked={plan === 'completo'}
-          onChange= {getInfo}
+          onChange={getInfo}
         />{' '}
         Completo
       </Field>
 
-      <Button type="button">Cotizar</Button>
+      <Button type="submit">Cotizar</Button>
     </form>
   )
 }
