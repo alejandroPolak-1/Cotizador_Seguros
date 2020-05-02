@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
-import { getDifferenceYear, getMarca } from './Helper'
+import { getDifferenceYear, getMarca, getPlan} from './Helper'
 
 const Field = styled.div`
   display: flex;
@@ -95,10 +95,13 @@ const Form = () => {
     // Europeo 30%
     result= getMarca(marca) *result
 
-    console.log(result)
-
+    
     //Basico aumenta %20
     //Completo 50%
+   const incrementPlan= getPlan(plan) 
+   result= parseFloat(incrementPlan * result).toFixed(2)
+
+   console.log(result)
 
     //Total
   }
