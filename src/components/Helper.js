@@ -30,3 +30,8 @@ export function getMarca(marca) {
 export function getPlan (plan) {
   return (plan === 'basico') ? 1.2 : 1.5
 }
+
+//Muestra primer letra en mayuscula
+export function firstUpperCase( text){
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
