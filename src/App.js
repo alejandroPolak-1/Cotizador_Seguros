@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './components/Header'
 import Form from './components/Form'
+import Resume from './components/Resume'
 
 import styled from '@emotion/styled'
 
@@ -14,11 +15,25 @@ const ConteinerForm = styled.div`
 `
 
 function App() {
+  const [resume, setResume] = useState({
+    cotizacion: 0,
+    datas: {
+      marca: '',
+      year: '',
+      plan: '',
+    },
+  })
+
+  //extraer datos
+  const { datas } = resume
+
   return (
     <Conteiner>
       <Header title="Cotizador de Seguros" />
       <ConteinerForm>
-          <Form/>
+        <Form setResume={setResume} />
+        <Resume 
+        datas= {datas}/>
       </ConteinerForm>
     </Conteiner>
   )

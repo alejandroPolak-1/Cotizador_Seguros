@@ -48,7 +48,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `
 
-const Form = () => {
+const Form = ({setResume}) => {
   const [datas, setDatas] = useState({
     marca: '',
     year: '',
@@ -104,6 +104,11 @@ const Form = () => {
    console.log(result)
 
     //Total
+    setResume({
+      cortizacion: result,
+      datas
+
+    })
   }
 
   return (
