@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from './components/Header'
 import Form from './components/Form'
 import Resume from './components/Resume'
+import Result from './components/Result'
 
 import styled from '@emotion/styled'
 
@@ -25,7 +26,7 @@ function App() {
   })
 
   //extraer datos
-  const { datas } = resume
+  const { cotizacion, datas } = resume
 
   return (
     <Conteiner>
@@ -34,6 +35,10 @@ function App() {
         <Form setResume={setResume} />
         <Resume 
         datas= {datas}/>
+        <Result
+        cotizacion={cotizacion}
+        />
+        
       </ConteinerForm>
     </Conteiner>
   )

@@ -105,7 +105,7 @@ const Form = ({setResume}) => {
 
     //Total
     setResume({
-      cortizacion: result,
+      cotizacion: result,
       datas
 
     })
