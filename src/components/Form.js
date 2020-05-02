@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
-import { getDifferenceYear, getMarca, getPlan} from './Helper'
+import { getDifferenceYear, getMarca, getPlan } from './Helper'
 
 const Field = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `
 
-const Form = ({setResume}) => {
+const Form = ({ setResume, setLoading }) => {
   const [datas, setDatas] = useState({
     marca: '',
     year: '',
@@ -86,29 +86,33 @@ const Form = ({setResume}) => {
 
     const difference = getDifferenceYear(year)
 
-     //por cada año hay que restar el 3%
+    //por cada año hay que restar el 3%
     result -= (difference * 3 * result) / 100
 
-    
     // Americano 155
     // Asiatico 5%
     // Europeo 30%
-    result= getMarca(marca) *result
+    result = getMarca(marca) * result
 
-    
     //Basico aumenta %20
     //Completo 50%
-   const incrementPlan= getPlan(plan) 
-   result= parseFloat(incrementPlan * result).toFixed(2)
+    const incrementPlan = getPlan(plan)
+    result = parseFloat(incrementPlan * result).toFixed(2)
 
-   console.log(result)
+    //Loading
+    setLoading(true)
 
-    //Total
-    setResume({
-      cotizacion: result,
-      datas
+    //Total -> mostrar luego de 2 seg
+    setTimeout(() => {
+      //elimina Spinner
+      setLoading(false)
 
-    })
+    //Pasa información al componente principal
+      setResume({
+        cotizacion: result,
+        datas,
+      })
+    }, 2000)
   }
 
   return (

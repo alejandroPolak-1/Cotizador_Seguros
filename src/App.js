@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Form from './components/Form'
 import Resume from './components/Resume'
 import Result from './components/Result'
+import Spinner from './components/Spinner'
 
 import styled from '@emotion/styled'
 
@@ -28,17 +29,26 @@ function App() {
   //extraer datos
   const { cotizacion, datas } = resume
 
+  //carga condicional luego de agregar spinner
+  const [loading, setLoading] = useState(false)
+
   return (
     <Conteiner>
       <Header title="Cotizador de Seguros" />
       <ConteinerForm>
-        <Form setResume={setResume} />
+        <Form 
+          setResume={setResume} 
+            setLoading={setLoading} />
+
+        {loading ? <Spinner /> : null}
+
         <Resume 
-        datas= {datas}/>
-        <Result
-        cotizacion={cotizacion}
-        />
+          datas={datas} 
+          />
         
+        {!loading ? 
+        <Result cotizacion={cotizacion} 
+        /> : null}
       </ConteinerForm>
     </Conteiner>
   )
